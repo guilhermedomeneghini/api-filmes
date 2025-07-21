@@ -1,11 +1,12 @@
 # API Filmes
 
-API RESTful completa para gerenciamento de filmes, desenvolvida com Node.js, Express, TypeScript e Prisma ORM.
+API RESTful completa para gerenciamento de filmes e autenticação de usuários, desenvolvida com Node.js, Express, TypeScript e Prisma ORM.
 
 ## ✨ Destaques do Projeto
 
 - **Arquitetura profissional**: Separação clara por camadas (controllers, services, models, validators, etc.)
-- **Validação robusta**: Uso do Zod para garantir integridade dos dados
+- **Validação robusta**: Uso do Zod para garantir integridade dos dados de filmes e usuários
+- **Autenticação**: Registro e login de usuários com senha criptografada
 - **ORM moderno**: Prisma para integração eficiente com PostgreSQL
 - **Documentação clara**: Código limpo, comentado e fácil de entender
 - **Pronto para produção**: Suporte a variáveis de ambiente, CORS, e estrutura escalável
@@ -15,8 +16,8 @@ API RESTful completa para gerenciamento de filmes, desenvolvida com Node.js, Exp
 
 - Listagem de filmes com filtros, busca e paginação
 - Consulta de filme por ID
-- Cadastro de novos filmes com validação
-- Edição e exclusão de filmes
+- Cadastro, edição e exclusão de filmes com validação
+- Registro e login de usuários
 - Integração com banco de dados relacional
 
 ## 🛠️ Tecnologias Utilizadas
@@ -28,20 +29,21 @@ API RESTful completa para gerenciamento de filmes, desenvolvida com Node.js, Exp
 - PostgreSQL
 - Zod (validação)
 - Docker & Docker Compose
+- bcrypt (criptografia de senha)
 
 ## 📁 Estrutura de Pastas
 
 ```
 src/
   config/         # Configurações (ex: Prisma)
-  controllers/    # Controllers das rotas
+  controllers/    # Controllers das rotas (filmes e usuários)
   middlewares/    # Middlewares customizados
   models/         # Tipos e interfaces TypeScript
   repository/     # Acesso a dados
-  routes/         # Definição das rotas
-  services/       # Lógica de negócio
+  routes/         # Definição das rotas (filmes e autenticação)
+  services/       # Lógica de negócio (filmes e usuários)
   utils/          # Utilitários
-  validators/     # Schemas de validação
+  validators/     # Schemas de validação (filmes e usuários)
 ```
 
 ## ⚡ Como rodar o projeto
@@ -77,6 +79,27 @@ src/
 
 ## 📚 Exemplos de uso
 
+### Autenticação de Usuário
+
+#### Registrar usuário
+`POST /auth`
+```json
+{
+  "nome": "Usuário Exemplo",
+  "email": "usuario@exemplo.com",
+  "senha": "minhasenha123"
+}
+```
+
+#### Login de usuário
+`POST /auth/login`
+```json
+{
+  "email": "usuario@exemplo.com",
+  "senha": "minhasenha123"
+}
+```
+
 ### Listar filmes
 `GET /filmes`
 
@@ -102,12 +125,13 @@ src/
 ### Excluir filme
 `DELETE /filmes/:id`
 
-## 💡 Diferencias dessa API
+## 💡 Diferenciais dessa API
 
 - **Código limpo e modular**: Fácil de manter e escalar
 - **Boas práticas de REST**: Verbos HTTP, status codes e validação
 - **Pronto para deploy**: Estrutura compatível com ambientes cloud
 - **Documentação e exemplos claros**
+- **Autenticação de usuários**
 - **Uso de ferramentas modernas do ecossistema Node.js**
 
 ## 👤 Autor
