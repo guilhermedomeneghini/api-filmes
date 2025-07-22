@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { userLoginSchema, userSchema } from '../validators/userValidator';
-import { prisma } from '../config/Prisma';
 import { createUser, loginUser } from '../services/userService';
 
 
@@ -42,7 +41,10 @@ export const login = async (req: Request, res: Response) => {
        const{user, token} =  await loginUser(userValidation.data);
         return res.status(200).json({
             message: 'Usuário logado com sucesso',
-            user,
+            user:{
+                nome: user.nome,
+                email: user.email,
+            },
             token,
         });
     }catch (error) {

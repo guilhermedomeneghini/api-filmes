@@ -41,6 +41,7 @@ export const loginUser = async (userData: { email: string; senha: string }) => {
         id: user.id,
         email: user.email,
         nome: user.nome,
+        role: user.role
     };
 
     const secretKey = process.env.JWT_SECRET as string;
