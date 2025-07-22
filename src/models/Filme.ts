@@ -6,7 +6,5 @@ export interface Filme{
     duracao: number;
     imagemUrl: string;
     classificacao: number;
-    diretor: string;
-    atores: string[];
     idioma: string;
 }

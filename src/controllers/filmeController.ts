@@ -25,7 +25,7 @@ export const buscarPorId = async (req: Request, res: Response) => {
     const filme = await getFilmeById(id);
     res.json(filme);
   } catch (error: any) {
-    res.status(404).json({ message: error.message });
+    res.status(404).json({ message: `404 - Conteudo não encontrado` });
   }
   console.log(id)
 }
@@ -77,13 +77,6 @@ export const editar = async (req: Request, res: Response) => {
 export const excluir = async (req: Request, res: Response) => {
 
   const id = parseInt(req.params.id);
-  const validateFilme = filmeSchema.safeParse(req.body);
-  if (!validateFilme.success) {
-    return res.status(400).json({
-      message: 'Dados inválidos',
-      errors: validateFilme.error.issues
-    });
-  }
 
   try{
     const filme = await deleteFilme(id);
@@ -92,6 +85,6 @@ export const excluir = async (req: Request, res: Response) => {
       filme
     });
   }catch(error:any){
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: 'Erro ao deletar filme' });
   }
 }

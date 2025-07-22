@@ -2,6 +2,7 @@ import { prisma } from "../config/Prisma";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
+import { AuthError, NotFoundError } from "../utils/erros";
 
 export const createUser = async (userData: { nome: string; email: string; senha: string }) => {
     
@@ -30,12 +31,12 @@ export const loginUser = async (userData: { email: string; senha: string }) => {
         }
     })
     if(!user){
-        throw new Error(`Usuário com email "${userData.email}" não encontrado`);
+        throw new NotFoundError('Usuário não encontrado');
     }
 
     const isPasswordValid = await bcrypt.compare(userData.senha, user.senha);
     if(!isPasswordValid) {
-        throw new Error('Senha inválida');
+        throw new AuthError('Usuário ou senha inválida');
     }
     const payload = {
         id: user.id,
@@ -48,7 +49,6 @@ export const loginUser = async (userData: { email: string; senha: string }) => {
     const token = jwt.sign(payload, secretKey, {
         expiresIn: '1d'
     })
-    console.log(secretKey)
 
     return { user, token };
 }
