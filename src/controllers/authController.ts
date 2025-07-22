@@ -39,12 +39,11 @@ export const login = async (req: Request, res: Response) => {
         });
     }
     try {
-        await loginUser(userValidation.data);
+       const{user, token} =  await loginUser(userValidation.data);
         return res.status(200).json({
             message: 'Usuário logado com sucesso',
-            user: {
-                email: userValidation.data.email
-            }
+            user,
+            token,
         });
     }catch (error) {
         return res.status(500).json({

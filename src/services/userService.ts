@@ -1,5 +1,7 @@
 import { prisma } from "../config/Prisma";
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 export const createUser = async (userData: { nome: string; email: string; senha: string }) => {
     
@@ -35,5 +37,17 @@ export const loginUser = async (userData: { email: string; senha: string }) => {
     if(!isPasswordValid) {
         throw new Error('Senha inválida');
     }
-    return user;
+    const payload = {
+        id: user.id,
+        email: user.email,
+        nome: user.nome,
+    };
+
+    const secretKey = process.env.JWT_SECRET as string;
+    const token = jwt.sign(payload, secretKey, {
+        expiresIn: '1d'
+    })
+    console.log(secretKey)
+
+    return { user, token };
 }
