@@ -15,8 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cors({
     origin: '*',
-    credentials: true
 }));
+
 
 app.use('/filmes', mainRouter)
 app.use('/auth', authRouter);
