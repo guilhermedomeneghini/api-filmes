@@ -39,7 +39,10 @@ export const cadastrar= async (req: Request, res: Response) => {
       errors: validateFilme.error.issues
     });
   }
-  const filme: Filme = validateFilme.data;
+const filme: Filme = {
+  ...validateFilme.data,
+  classificacao: validateFilme.data.classificacao ?? 0,  // default para 0 se undefined
+};
 
   try {
     await addFilme(filme);

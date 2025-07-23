@@ -5,6 +5,6 @@ export interface Filme{
     anoLancamento: number;
     duracao: number;
     imagemUrl: string;
-    classificacao: number;
-    idioma: string;
+    classificacao?: number;
+    idioma?: string;
 }
