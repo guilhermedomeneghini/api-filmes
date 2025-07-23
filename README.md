@@ -1,143 +1,58 @@
 # API Filmes
 
-API RESTful completa para gerenciamento de filmes e autenticação de usuários, desenvolvida com Node.js, Express, TypeScript e Prisma ORM.
+## Demonstração online
 
-## ✨ Destaques do Projeto
+Acesse a API em produção:
+➡️ https://api-filmes-vo0f.onrender.com
 
-- **Arquitetura profissional**: Separação clara por camadas (controllers, services, models, validators, etc.)
-- **Validação robusta**: Uso do Zod para garantir integridade dos dados de filmes e usuários
-- **Autenticação**: Registro e login de usuários com senha criptografada
-- **ORM moderno**: Prisma para integração eficiente com PostgreSQL
-- **Documentação clara**: Código limpo, comentado e fácil de entender
-- **Pronto para produção**: Suporte a variáveis de ambiente, CORS, e estrutura escalável
-- **Docker-ready**: Inclui docker-compose para facilitar setup local
+Documentação Swagger:
+➡️ https://api-filmes-vo0f.onrender.com/api-docs
 
-## 🚀 Funcionalidades
+## Sobre
+Projeto simples para praticar conceitos de backend, autenticação, validação e integração com banco de dados.
 
-- Listagem de filmes com filtros, busca e paginação
-- Consulta de filme por ID
-- Cadastro, edição e exclusão de filmes com validação
-- Registro e login de usuários
-- Integração com banco de dados relacional
+- Cadastro, login e autenticação de usuários
+- CRUD de filmes
+- Estrutura modular (controllers, services, middlewares, etc.)
+- Validação com Zod
+- Prisma ORM + PostgreSQL
+- Documentação Swagger em `/api-docs`
 
-## 🛠️ Tecnologias Utilizadas
+> **Atenção:** O diretório `repository` está vazio (ainda não implementado).
 
-- Node.js
-- Express
-- TypeScript
-- Prisma ORM
-- PostgreSQL
-- Zod (validação)
-- Docker & Docker Compose
-- bcrypt (criptografia de senha)
-
-## 📁 Estrutura de Pastas
+## Variáveis de ambiente
+Copie o arquivo `.env.example` para `.env` e edite as variáveis conforme necessário:
 
 ```
-src/
-  config/         # Configurações (ex: Prisma)
-  controllers/    # Controllers das rotas (filmes e usuários)
-  middlewares/    # Middlewares customizados
-  models/         # Tipos e interfaces TypeScript
-  repository/     # Acesso a dados
-  routes/         # Definição das rotas (filmes e autenticação)
-  services/       # Lógica de negócio (filmes e usuários)
-  utils/          # Utilitários
-  validators/     # Schemas de validação (filmes e usuários)
+cp .env.example .env
 ```
 
-## ⚡ Como rodar o projeto
+As variáveis disponíveis são:
+- `PORT`
+- `DATABASE_URL`
+- `JWT_SECRET`
 
-1. **Clone o repositório**
+## Como rodar
+
+1. Clone o repositório:
    ```bash
    git clone https://github.com/guilhermedomeneghini/api-filmes
    cd api-filmes
    ```
-
-2. **Instale as dependências**
+2. Instale as dependências:
    ```bash
    npm install
    ```
-
-3. **Configure o banco de dados**
-   - Crie um arquivo `.env` na raiz com a variável `DATABASE_URL` para seu PostgreSQL.
-   - Exemplo:
-     ```
-     DATABASE_URL="postgresql://usuario:senha@localhost:5432/seubanco"
-     ```
-
-4. **Rode as migrations do Prisma**
+3. Configure o ambiente:
+   - Copie o arquivo `.env.example` para `.env` e ajuste as variáveis.
+4. Rode as migrations:
    ```bash
    npx prisma migrate dev
    ```
-
-5. **Inicie o servidor**
+5. Inicie o servidor:
    ```bash
    npm run dev
    ```
-   O servidor estará rodando em `http://localhost:3000`
 
-## 📚 Exemplos de uso
-
-### Autenticação de Usuário
-
-#### Registrar usuário
-`POST /auth`
-```json
-{
-  "nome": "Usuário Exemplo",
-  "email": "usuario@exemplo.com",
-  "senha": "minhasenha123"
-}
-```
-
-#### Login de usuário
-`POST /auth/login`
-```json
-{
-  "email": "usuario@exemplo.com",
-  "senha": "minhasenha123"
-}
-```
-
-### Listar filmes
-`GET /filmes`
-
-### Buscar filme por ID
-`GET /filmes/:id`
-
-### Cadastrar filme
-`POST /filmes`
-```json
-{
-  "titulo": "Filme Exemplo",
-  "descricao": "Descrição do filme",
-  "genero": "Ação",
-  "anoLancamento": 2022,
-  "duracao": 120,
-  "imagemUrl": "https://exemplo.com/imagem.jpg"
-}
-```
-
-### Editar filme
-`PUT /filmes/:id`
-
-### Excluir filme
-`DELETE /filmes/:id`
-
-## 💡 Diferenciais dessa API
-
-- **Código limpo e modular**: Fácil de manter e escalar
-- **Boas práticas de REST**: Verbos HTTP, status codes e validação
-- **Pronto para deploy**: Estrutura compatível com ambientes cloud
-- **Documentação e exemplos claros**
-- **Autenticação de usuários**
-- **Uso de ferramentas modernas do ecossistema Node.js**
-
-## 👤 Autor
-
+## Autor
 - [Guilherme Walmeling](https://github.com/guilhermedomeneghini)
-
-## 📄 Licença
-
-ISC
