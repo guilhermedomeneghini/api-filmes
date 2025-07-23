@@ -5,6 +5,8 @@ import cors from 'cors';
 import authRouter from './routes/authRoutes';
 import helmet from 'helmet';
 import { errorHandler } from './middlewares/errorHandler';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './docs/swagger';
 
 const app = express();
 const port = parseInt(process.env.PORT || '3000');
@@ -17,7 +19,8 @@ app.use(cors({
 }));
 
 app.use('/filmes', mainRouter)
-app.use('/auth', authRouter); 
+app.use('/auth', authRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(errorHandler);
 
 
