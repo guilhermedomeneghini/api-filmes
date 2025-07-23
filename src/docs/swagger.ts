@@ -9,8 +9,8 @@ const swaggerDocument = {
   },
   servers: [
     {
-      url: "http://localhost:3000",
-      description: "Servidor local",
+      url: "https://api-filmes-vo0f.onrender.com",
+      description: "Servidor de Produção",
     },
   ],
   tags: [
