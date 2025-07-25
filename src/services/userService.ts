@@ -1,35 +1,23 @@
-import { prisma } from "../config/Prisma";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
 import { AuthError, NotFoundError } from "../utils/erros";
+import { createUserDB, getUserByEmail } from "../repository/userRepository";
 
 export const createUser = async (userData: { nome: string; email: string; senha: string }) => {
     
-    if(await prisma.usuario.findFirst({ where: { email: userData.email } })) {
+    const userExists =await getUserByEmail(userData.email);
+    if(userExists){
         throw new Error(`Usuário com email "${userData.email}" já existe`);
     }
 
-    const passwordHash = await bcrypt.hash(userData.senha, 10);
-    const user = await prisma.usuario.create({
-        data:{
-            nome: userData.nome,
-            email: userData.email,
-            senha: passwordHash
-        }
-
-    });
-
+    const user = await createUserDB(userData);
     return user;
 
 }
 
 export const loginUser = async (userData: { email: string; senha: string }) => {
-    const user = await prisma.usuario.findFirst({
-        where:{
-            email: userData.email
-        }
-    })
+    const user = await getUserByEmail(userData.email);
     if(!user){
         throw new NotFoundError('Usuário não encontrado');
     }
