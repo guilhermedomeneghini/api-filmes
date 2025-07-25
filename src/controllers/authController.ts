@@ -22,7 +22,7 @@ export const register = async (req: Request, res: Response) => {
             }
         });
     }catch (error) {
-        return res.status(500).json({
+        return res.status(400).json({
             message: messages.internalError,
             error: error instanceof Error ? error.message : 'Erro desconhecido'
         });
