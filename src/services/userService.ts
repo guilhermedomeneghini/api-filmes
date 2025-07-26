@@ -1,14 +1,14 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
-import { AuthError, NotFoundError } from "../utils/erros";
+import { AuthError, NotFoundError, UserExistsError } from "../utils/erros";
 import { createUserDB, getUserByEmail } from "../repository/userRepository";
 
 export const createUser = async (userData: { nome: string; email: string; senha: string }) => {
     
-    const userExists =await getUserByEmail(userData.email);
+    const userExists = await getUserByEmail(userData.email);
     if(userExists){
-        throw new Error(`Usuário com email "${userData.email}" já existe`);
+        throw new UserExistsError(`Usuário com email "${userData.email}" já existe`);
     }
 
     const user = await createUserDB(userData);

@@ -19,3 +19,10 @@ export class NotFoundError extends AppError {
     super(message, 404, details);
   }
 }
+
+export class UserExistsError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'UserExistsError';
+  }
+}
